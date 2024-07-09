@@ -19,12 +19,20 @@ public class ServicioMascota {
     }
 
     public Mascota buscarMascota(UUID id) {
-        return mascotaRep.findById(id).orElseThrow(()-> new RuntimeException("Mascota no encontrada"));
+
+        return mascotaRep.findById(id)
+        .filter(Mascota::getActivo)
+        .orElseThrow(()-> new RuntimeException("Mascota no encontrada"));
     }
 
     public void bajaMascota(UUID id) {
         Mascota mascota = buscarMascota(id);
-        //ver que es lo que hay que hacer con la baja de las mascotas.
+        mascota.setActivo(false);
         mascotaRep.save(mascota);
     }
+
+    public List<Mascota> listarMascotas() {
+        return mascotaRep.findByActivo(true);
+    }
+    
 }
