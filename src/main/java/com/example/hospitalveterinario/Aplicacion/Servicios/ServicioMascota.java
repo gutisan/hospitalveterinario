@@ -7,6 +7,7 @@ import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Masc
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class ServicioMascota {
     private final MascotaRep mascotaRep;
 
@@ -34,5 +35,5 @@ public class ServicioMascota {
     public List<Mascota> listarMascotas() {
         return mascotaRep.findByActivo(true);
     }
-    
+
 }
