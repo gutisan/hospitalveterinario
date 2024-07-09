@@ -8,7 +8,7 @@ import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingr
 import java.util.List;
 import java.util.UUID;
 
-
+@Service
 public class ServicioIngreso {
     private final IngresoRep ingresoRep;
 
@@ -16,7 +16,7 @@ public class ServicioIngreso {
         this.ingresoRep = ingresoRep;
     }
 
-    public List <Ingreso> ObtenerIngresos() {
+    public List <Ingreso> obtenerIngresos() {
         return ingresoRep.findAll();
     }
 
