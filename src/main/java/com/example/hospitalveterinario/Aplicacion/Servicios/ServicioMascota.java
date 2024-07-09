@@ -22,5 +22,9 @@ public class ServicioMascota {
         return mascotaRep.findById(id).orElseThrow(()-> new RuntimeException("Mascota no encontrada"));
     }
 
-
+    public void bajaMascota(UUID id) {
+        Mascota mascota = buscarMascota(id);
+        //ver que es lo que hay que hacer con la baja de las mascotas.
+        mascotaRep.save(mascota);
+    }
 }

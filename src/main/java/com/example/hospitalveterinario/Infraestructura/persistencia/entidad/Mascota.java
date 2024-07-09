@@ -15,6 +15,7 @@ public class Mascota {
     private Integer edad;
     private String codigoIdentificacion;
     private String dniResponsable;
+    private Boolean activo;
 
     // Getters y Setters
     public UUID getId() {
@@ -63,6 +64,14 @@ public class Mascota {
 
     public void setDniResponsable(String dniResponsable) {
         this.dniResponsable = dniResponsable;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 
 }
