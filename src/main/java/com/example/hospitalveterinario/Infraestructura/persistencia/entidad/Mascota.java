@@ -3,10 +3,9 @@ package com.example.hospitalveterinario.Infraestructura.persistencia.entidad;
 import javax.persistence.*;
 import java.util.UUID;
 
-
 @Entity
 public class Mascota {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -75,6 +74,3 @@ public class Mascota {
     }
 
 }
-
-
-
