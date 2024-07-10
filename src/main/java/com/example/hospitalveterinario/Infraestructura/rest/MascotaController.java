@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import com.example.hospitalveterinario.Aplicacion.Servicios.ServicioMascota;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Mascota;
 
+import org.springframework.http.HttpStatus;
+
+/**
+ * Controlador REST para la entidad Mascota.
+ */
 @RestController
 @RequestMapping("/mascota")
 public class MascotaController {
@@ -28,7 +33,8 @@ public class MascotaController {
      */
     @PostMapping
     public ResponseEntity<Mascota> guardarMascota(@RequestBody Mascota mascota) {
-        return ResponseEntity.ok(servicioMascota.guardarMascota(mascota));
+        Mascota nuevaMascota = servicioMascota.guardarMascota(mascota);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaMascota);
     }
 
     /**
@@ -39,7 +45,12 @@ public class MascotaController {
      */
     @GetMapping("/{idMascota}")
     public ResponseEntity<Mascota> buscarMascota(@PathVariable Long idMascota) {
-        return ResponseEntity.ok(servicioMascota.buscarMascota(idMascota));
+        Mascota mascota = servicioMascota.buscarMascota(idMascota);
+        if (mascota != null) {
+            return ResponseEntity.ok(mascota);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     /**
@@ -50,7 +61,12 @@ public class MascotaController {
      */
     @DeleteMapping("/{idMascota}")
     public ResponseEntity<Void> bajaMascota(@PathVariable Long idMascota) {
-        servicioMascota.bajaMascota(idMascota);
-        return ResponseEntity.noContent().build();
+        Mascota mascota = servicioMascota.buscarMascota(idMascota);
+        if (mascota != null) {
+            servicioMascota.bajaMascota(idMascota);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

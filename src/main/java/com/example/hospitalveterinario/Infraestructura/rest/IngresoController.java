@@ -34,7 +34,11 @@ public class IngresoController {
     @GetMapping
     public ResponseEntity<List<Ingreso>> obtenerIngresos() {
         List<Ingreso> ingresos = servicioIngreso.obtenerIngresos();
-        return ResponseEntity.ok(ingresos);
+        if (ingresos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        } else {
+            return ResponseEntity.ok(ingresos);
+        }
     }
 
     /**
@@ -96,6 +100,10 @@ public class IngresoController {
     @GetMapping("/mascota/{idMascota}")
     public ResponseEntity<List<Ingreso>> obtenerIngresosPorMascota(@PathVariable Long idMascota) {
         List<Ingreso> ingresos = servicioIngreso.obtenerIngresosPorMascota(idMascota);
-        return ResponseEntity.ok(ingresos);
+        if (ingresos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        } else {
+            return ResponseEntity.ok(ingresos);
+        }
     }
 }
