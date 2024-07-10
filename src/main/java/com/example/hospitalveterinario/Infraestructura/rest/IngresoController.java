@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.hospitalveterinario.Aplicacion.Servicios.ServicioIngreso;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingreso;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -45,7 +46,7 @@ public class IngresoController {
     @PostMapping
     public ResponseEntity<Ingreso> crearIngreso(@RequestBody Ingreso ingreso) {
         Ingreso nuevoIngreso = servicioIngreso.crearIngreso(ingreso);
-        return ResponseEntity.ok(nuevoIngreso);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoIngreso);
     }
 
     /**
@@ -62,8 +63,12 @@ public class IngresoController {
             @PathVariable Long idMascota,
             @PathVariable Long idIngreso,
             @RequestBody Ingreso ingreso) {
-        Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idMascota, idIngreso, ingreso);
-        return ResponseEntity.ok(ingresoActualizado);
+        try {
+            Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idMascota, idIngreso, ingreso);
+            return ResponseEntity.ok(ingresoActualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
     /**
@@ -74,8 +79,12 @@ public class IngresoController {
      */
     @DeleteMapping("/{idIngreso}")
     public ResponseEntity<Void> anularIngreso(@PathVariable Long idIngreso) {
-        servicioIngreso.anularIngreso(idIngreso);
-        return ResponseEntity.noContent().build();
+        try {
+            servicioIngreso.anularIngreso(idIngreso);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     /**
