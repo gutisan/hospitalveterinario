@@ -18,7 +18,7 @@ public class Mascota {
     private Integer edad;
     private String codigoIdentificacion;
     private String dniResponsable;
-    private Boolean activo;
+    private Boolean activo = true;
 
     // Getters y Setters
     public Long getId() {
