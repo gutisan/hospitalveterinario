@@ -3,6 +3,11 @@ package com.example.hospitalveterinario.Infraestructura.persistencia.entidad;
 import javax.persistence.*;
 import java.util.UUID;
 
+/**
+ * Representa una entrada de mascota Mascota en el sistema.
+ * 
+ * Esta clase contiene las propiedades y metodos de Mascota.
+ */
 @Entity
 public class Mascota {
 

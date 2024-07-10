@@ -6,7 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 import java.util.List;
 
-
-public interface MascotaRep extends JpaRepository<Mascota, UUID>{
+/**
+ * Esta interfaz representa el repositorio de la entidad Mascota en la capa de
+ * persistencia.
+ * Extiende la interfaz JpaRepository de Spring Data JPA para obtener
+ * funcionalidades de acceso a datos.
+ */
+public interface MascotaRep extends JpaRepository<Mascota, UUID> {
+    /**
+     * Busca y devuelve una lista de mascotas activas.
+     * 
+     * @param activo el estado de activación de las mascotas a buscar
+     * @return una lista de mascotas activas
+     */
     List<Mascota> findByActivo(Boolean activo);
 }
