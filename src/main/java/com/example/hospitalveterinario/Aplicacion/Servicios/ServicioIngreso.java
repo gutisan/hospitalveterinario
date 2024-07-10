@@ -64,6 +64,9 @@ public class ServicioIngreso {
 
         if (ingresoActualizado.getFechaSalida() != null) {
             ingreso.setFechaSalida(ingresoActualizado.getFechaSalida());
+            if (ingresoActualizado.getEstado() == null) {
+                ingreso.setEstado(EstadoIngreso.FINALIZADO);
+            }
         }
 
         return ingresoRep.save(ingreso);
