@@ -105,7 +105,7 @@ public class Ingreso {
      *
      * @return La mascota asociada al ingreso.
      */
-    public Mascota getMascota() {
+    public Mascota buscarMascota() {
         return mascota;
     }
 
