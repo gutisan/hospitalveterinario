@@ -18,7 +18,7 @@ public class Ingreso {
     private LocalDateTime fechaSalida;
 
     @Enumerated(EnumType.STRING)
-    private EstadoIngreso estado;
+    private EstadoIngreso estado = EstadoIngreso.ALTA;
 
     @ManyToOne
     @JoinColumn(name = "mascota_id", nullable = false)
