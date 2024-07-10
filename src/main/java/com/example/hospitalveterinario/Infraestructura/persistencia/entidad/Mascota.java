@@ -1,7 +1,6 @@
 package com.example.hospitalveterinario.Infraestructura.persistencia.entidad;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 /**
  * Representa una entrada de mascota Mascota en el sistema.
@@ -12,7 +11,7 @@ import java.util.UUID;
 public class Mascota {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String especie;
     private String raza;
