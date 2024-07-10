@@ -13,7 +13,7 @@ public class Ingreso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private LocalDateTime fechaIngreso;
     private LocalDateTime fechaSalida;
 
@@ -33,7 +33,7 @@ public class Ingreso {
      *
      * @return El ID del ingreso.
      */
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -42,7 +42,7 @@ public class Ingreso {
      *
      * @param id El ID del ingreso.
      */
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

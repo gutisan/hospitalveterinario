@@ -6,7 +6,6 @@ import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingr
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.UUID;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,7 +56,7 @@ public class IngresoController {
      * @return Un ResponseEntity que contiene el ingreso actualizado.
      */
     @PutMapping("/{idIngreso}")
-    public ResponseEntity<Ingreso> actualizarIngreso(@PathVariable UUID idIngreso, @RequestBody Ingreso ingreso) {
+    public ResponseEntity<Ingreso> actualizarIngreso(@PathVariable Long idIngreso, @RequestBody Ingreso ingreso) {
         Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idIngreso, ingreso);
         return ResponseEntity.ok(ingresoActualizado);
     }
@@ -69,7 +68,7 @@ public class IngresoController {
      * @return Un ResponseEntity sin contenido.
      */
     @DeleteMapping("/{idIngreso}")
-    public ResponseEntity<Void> anularIngreso(@PathVariable UUID idIngreso) {
+    public ResponseEntity<Void> anularIngreso(@PathVariable Long idIngreso) {
         servicioIngreso.anularIngreso(idIngreso);
         return ResponseEntity.noContent().build();
     }
@@ -81,7 +80,7 @@ public class IngresoController {
      * @return Un ResponseEntity que contiene la lista de ingresos para la mascota.
      */
     @GetMapping("/mascota/{idMascota}")
-    public ResponseEntity<List<Ingreso>> obtenerIngresosPorMascota(@PathVariable UUID idMascota) {
+    public ResponseEntity<List<Ingreso>> obtenerIngresosPorMascota(@PathVariable Long idMascota) {
         List<Ingreso> ingresos = servicioIngreso.obtenerIngresosPorMascota(idMascota);
         return ResponseEntity.ok(ingresos);
     }

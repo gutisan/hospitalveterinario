@@ -5,7 +5,6 @@ import com.example.hospitalveterinario.Infraestructura.persistencia.Repositorios
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Mascota;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ServicioMascota {
@@ -37,7 +36,7 @@ public class ServicioMascota {
      * @return el objeto Mascota recuperado
      * @throws RuntimeException si el objeto Mascota no se encuentra
      */
-    public Mascota buscarMascota(UUID id) {
+    public Mascota buscarMascota(Long id) {
         return mascotaRep.findById(id)
                 .filter(Mascota::getActivo)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
@@ -49,7 +48,7 @@ public class ServicioMascota {
      * 
      * @param id el ID del objeto Mascota a desactivar
      */
-    public void bajaMascota(UUID id) {
+    public void bajaMascota(Long id) {
         Mascota mascota = buscarMascota(id);
         mascota.setActivo(false);
         mascotaRep.save(mascota);

@@ -1,7 +1,5 @@
 package com.example.hospitalveterinario.Infraestructura.rest;
 
-import java.util.UUID;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.hospitalveterinario.Aplicacion.Servicios.ServicioMascota;
@@ -40,7 +38,7 @@ public class MascotaController {
      * @return El ResponseEntity con el objeto Mascota encontrado.
      */
     @GetMapping("/{idMascota}")
-    public ResponseEntity<Mascota> buscarMascota(@PathVariable UUID idMascota) {
+    public ResponseEntity<Mascota> buscarMascota(@PathVariable Long idMascota) {
         return ResponseEntity.ok(servicioMascota.buscarMascota(idMascota));
     }
 
@@ -51,7 +49,7 @@ public class MascotaController {
      * @return El ResponseEntity que indica el éxito de la eliminación.
      */
     @DeleteMapping("/{idMascota}")
-    public ResponseEntity<Void> bajaMascota(@PathVariable UUID idMascota) {
+    public ResponseEntity<Void> bajaMascota(@PathVariable Long idMascota) {
         servicioMascota.bajaMascota(idMascota);
         return ResponseEntity.noContent().build();
     }

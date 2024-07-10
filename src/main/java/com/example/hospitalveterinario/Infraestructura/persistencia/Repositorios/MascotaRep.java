@@ -3,7 +3,6 @@ package com.example.hospitalveterinario.Infraestructura.persistencia.Repositorio
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Mascota;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  * Extiende la interfaz JpaRepository de Spring Data JPA para obtener
  * funcionalidades de acceso a datos.
  */
-public interface MascotaRep extends JpaRepository<Mascota, UUID> {
+public interface MascotaRep extends JpaRepository<Mascota, Long> {
     /**
      * Busca y devuelve una lista de mascotas activas.
      * 

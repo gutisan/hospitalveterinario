@@ -13,7 +13,7 @@ public class Mascota {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String especie;
     private String raza;
     private Integer edad;
@@ -22,11 +22,11 @@ public class Mascota {
     private Boolean activo;
 
     // Getters y Setters
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
