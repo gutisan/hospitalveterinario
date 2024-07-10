@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.UUID;
+import java.util.Random;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,7 +32,8 @@ public class ServicioMascotaTest {
     @Test
     void testObtenerMascotaPorId() {
         Mascota mascota = new Mascota();
-        mascota.setId(UUID.randomUUID());
+        Random random = new Random();
+        mascota.setId(random.nextLong());
 
         Mockito.when(mascotaRep.findById(mascota.getId())).thenReturn(Optional.of(mascota));
 
@@ -47,7 +48,8 @@ public class ServicioMascotaTest {
     @Test
     void testObtenerMascotaPorIdNoEncontrado() {
         Mascota mascota = new Mascota();
-        mascota.setId(UUID.randomUUID());
+        Random random = new Random();
+        mascota.setId(random.nextLong());
 
         Mockito.when(mascotaRep.findById(mascota.getId())).thenReturn(Optional.empty());
 
