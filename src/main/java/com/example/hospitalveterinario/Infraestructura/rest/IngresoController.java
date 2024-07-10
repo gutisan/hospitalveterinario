@@ -51,13 +51,18 @@ public class IngresoController {
     /**
      * Actualiza un ingreso existente.
      * 
+     * 
      * @param idIngreso El ID del ingreso que se va a actualizar.
+     * 
      * @param ingreso   El objeto de ingreso actualizado.
      * @return Un ResponseEntity que contiene el ingreso actualizado.
      */
-    @PutMapping("/{idIngreso}")
-    public ResponseEntity<Ingreso> actualizarIngreso(@PathVariable Long idIngreso, @RequestBody Ingreso ingreso) {
-        Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idIngreso, ingreso);
+    @PutMapping("/{idMascota}/{idIngreso}")
+    public ResponseEntity<Ingreso> actualizarIngreso(
+            @PathVariable Long idMascota,
+            @PathVariable Long idIngreso,
+            @RequestBody Ingreso ingreso) {
+        Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idMascota, idIngreso, ingreso);
         return ResponseEntity.ok(ingresoActualizado);
     }
 

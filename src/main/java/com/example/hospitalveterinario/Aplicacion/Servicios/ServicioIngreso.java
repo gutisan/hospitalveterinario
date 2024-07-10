@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.example.hospitalveterinario.Infraestructura.persistencia.Repositorios.IngresoRep;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.EstadoIngreso;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingreso;
+import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Mascota;
 
 import java.util.List;
 
@@ -40,13 +41,31 @@ public class ServicioIngreso {
     }
 
     /**
-     * Actualiza una entidad Ingreso existente.
-     * 
-     * @param id      El ID de la entidad Ingreso a actualizar.
-     * @param ingreso La entidad Ingreso actualizada.
-     * @return La entidad Ingreso actualizada.
+     * Actualiza un ingreso existente en el sistema.
+     *
+     * @param idIngreso          El ID del ingreso a actualizar.
+     * @param idMascota          El ID de la mascota asociada al ingreso.
+     * @param ingresoActualizado El objeto Ingreso con los datos actualizados.
+     * @return El ingreso actualizado.
+     * @throws RuntimeException Si el ingreso no se encuentra o no corresponde a la
+     *                          mascota especificada.
      */
-    public Ingreso actualizarIngreso(Long id, Ingreso ingreso) {
+    public Ingreso actualizarIngreso(Long idIngreso, Long idMascota, Ingreso ingresoActualizado) {
+        Ingreso ingreso = ingresoRep.findById(idIngreso)
+                .orElseThrow(() -> new RuntimeException("Ingreso no encontrado"));
+        Mascota mascota = ingreso.buscarMascota();
+
+        if (mascota == null || !mascota.getId().equals(idMascota)) {
+            throw new RuntimeException("El ingreso no corresponde a la mascota especificada");
+        }
+        if (ingresoActualizado.getEstado() != null) {
+            ingreso.setEstado(ingresoActualizado.getEstado());
+        }
+
+        if (ingresoActualizado.getFechaSalida() != null) {
+            ingreso.setFechaSalida(ingresoActualizado.getFechaSalida());
+        }
+
         return ingresoRep.save(ingreso);
     }
 
