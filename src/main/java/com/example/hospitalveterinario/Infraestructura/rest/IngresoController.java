@@ -68,7 +68,7 @@ public class IngresoController {
             @PathVariable Long idIngreso,
             @RequestBody Ingreso ingreso) {
         try {
-            Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idMascota, idIngreso, ingreso);
+            Ingreso ingresoActualizado = servicioIngreso.actualizarIngreso(idIngreso, idMascota, ingreso);
             return ResponseEntity.ok(ingresoActualizado);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

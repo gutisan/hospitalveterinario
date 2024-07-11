@@ -1,6 +1,8 @@
 package com.example.hospitalveterinario.Aplicacion.Servicios;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.hospitalveterinario.Infraestructura.persistencia.Repositorios.IngresoRep;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.EstadoIngreso;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingreso;
@@ -50,6 +52,7 @@ public class ServicioIngreso {
      * @throws RuntimeException Si el ingreso no se encuentra o no corresponde a la
      *                          mascota especificada.
      */
+    @Transactional
     public Ingreso actualizarIngreso(Long idIngreso, Long idMascota, Ingreso ingresoActualizado) {
         Ingreso ingreso = ingresoRep.findById(idIngreso)
                 .orElseThrow(() -> new RuntimeException("Ingreso no encontrado"));
@@ -58,15 +61,14 @@ public class ServicioIngreso {
         if (mascota == null || !mascota.getId().equals(idMascota)) {
             throw new RuntimeException("El ingreso no corresponde a la mascota especificada");
         }
-        if (ingresoActualizado.getEstado() != null) {
-            ingreso.setEstado(ingresoActualizado.getEstado());
-        }
-
         if (ingresoActualizado.getFechaSalida() != null) {
             ingreso.setFechaSalida(ingresoActualizado.getFechaSalida());
-            if (ingresoActualizado.getEstado() == null) {
-                ingreso.setEstado(EstadoIngreso.FINALIZADO);
-            }
+        }
+
+        if (ingresoActualizado.getEstado() != null) {
+            ingreso.setEstado(ingresoActualizado.getEstado());
+        } else if (ingreso.getFechaSalida() != null) {
+            ingreso.setEstado(EstadoIngreso.FINALIZADO);
         }
 
         return ingresoRep.save(ingreso);

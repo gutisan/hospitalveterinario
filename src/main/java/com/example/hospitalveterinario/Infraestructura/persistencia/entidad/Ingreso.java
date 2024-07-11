@@ -2,6 +2,8 @@ package com.example.hospitalveterinario.Infraestructura.persistencia.entidad;
 
 import javax.persistence.*;
 
+import org.springframework.data.jpa.repository.Temporal;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +16,9 @@ public class Ingreso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "fecha_ingreso", nullable = false)
     private LocalDateTime fechaIngreso;
+    @Column(name = "fecha_salida")
     private LocalDateTime fechaSalida;
 
     @Enumerated(EnumType.STRING)
