@@ -10,6 +10,7 @@ import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingr
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Mascota;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 public class ServicioIngreso {
@@ -57,23 +58,32 @@ public class ServicioIngreso {
      */
     @Transactional
     public Ingreso actualizarIngreso(Long idIngreso, Long idMascota, Ingreso ingresoActualizado) {
+        // Busca el ingreso por ID
+
         Ingreso ingreso = ingresoRep.findById(idIngreso)
                 .orElseThrow(() -> new RuntimeException("Ingreso no encontrado"));
+        // verifica que el ingreso corresponda a la mascota especificada
         Mascota mascota = ingreso.buscarMascota();
 
         if (mascota == null || !mascota.getId().equals(idMascota)) {
             throw new RuntimeException("El ingreso no corresponde a la mascota especificada");
         }
+        // Actualiza el estado del ingreso y la fecha de salida si corresponde
+        if (ingresoActualizado.getEstado() != null) {
+            if (ingresoActualizado.getEstado() == EstadoIngreso.FINALIZADO) {
+                ingreso.setEstado(EstadoIngreso.FINALIZADO);
+                ingreso.setFechaSalida(LocalDateTime.now()); // Guarda la fecha actual
+            } else {
+                ingreso.setEstado(ingresoActualizado.getEstado());
+            }
+        }
+
+        // Si se proporciona una fecha de salida, actualizarla y cambiar el estado a
+        // FINALIZADO
         if (ingresoActualizado.getFechaSalida() != null) {
             ingreso.setFechaSalida(ingresoActualizado.getFechaSalida());
-        }
-
-        if (ingresoActualizado.getEstado() != null) {
-            ingreso.setEstado(ingresoActualizado.getEstado());
-        } else if (ingreso.getFechaSalida() != null) {
             ingreso.setEstado(EstadoIngreso.FINALIZADO);
         }
-
         return ingresoRep.save(ingreso);
     }
 
