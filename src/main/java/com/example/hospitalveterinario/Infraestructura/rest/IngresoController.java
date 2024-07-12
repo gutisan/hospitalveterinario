@@ -91,19 +91,4 @@ public class IngresoController {
         }
     }
 
-    /**
-     * Obtiene una lista de ingresos para una mascota específica.
-     * 
-     * @param idMascota El ID de la mascota.
-     * @return Un ResponseEntity que contiene la lista de ingresos para la mascota.
-     */
-    @GetMapping("/mascota/{idMascota}")
-    public ResponseEntity<List<Ingreso>> obtenerIngresosPorMascota(@PathVariable Long idMascota) {
-        List<Ingreso> ingresos = servicioIngreso.obtenerIngresosPorMascota(idMascota);
-        if (ingresos.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-        } else {
-            return ResponseEntity.ok(ingresos);
-        }
-    }
 }

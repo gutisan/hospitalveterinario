@@ -1,9 +1,6 @@
 package com.example.hospitalveterinario.Infraestructura.persistencia.entidad;
 
 import javax.persistence.*;
-
-import org.springframework.data.jpa.repository.Temporal;
-
 import java.time.LocalDateTime;
 
 @Entity
