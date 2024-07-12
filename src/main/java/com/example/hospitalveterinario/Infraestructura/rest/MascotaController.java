@@ -21,15 +21,16 @@ public class MascotaController {
 
     private final ServicioMascota servicioMascota;
 
-    private ServicioIngreso servicioIngreso;
+    private final ServicioIngreso servicioIngreso;
 
     /**
      * Constructor para MascotaController.
      * 
      * @param servicioMascota El servicio para gestionar objetos Mascota.
      */
-    public MascotaController(ServicioMascota servicioMascota) {
+    public MascotaController(ServicioMascota servicioMascota, ServicioIngreso servicioIngreso) {
         this.servicioMascota = servicioMascota;
+        this.servicioIngreso = servicioIngreso;
     }
 
     /**
