@@ -2,10 +2,15 @@ package com.example.hospitalveterinario.Infraestructura.rest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.hospitalveterinario.Aplicacion.Servicios.ServicioIngreso;
 import com.example.hospitalveterinario.Aplicacion.Servicios.ServicioMascota;
+import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Ingreso;
 import com.example.hospitalveterinario.Infraestructura.persistencia.entidad.Mascota;
 
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 /**
  * Controlador REST para la entidad Mascota.
@@ -15,6 +20,8 @@ import org.springframework.http.HttpStatus;
 public class MascotaController {
 
     private final ServicioMascota servicioMascota;
+
+    private ServicioIngreso servicioIngreso;
 
     /**
      * Constructor para MascotaController.
@@ -67,6 +74,16 @@ public class MascotaController {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/{idMascota}/ingreso")
+    public ResponseEntity<List<Ingreso>> obtenerIngresosPorMascota(@PathVariable Long idMascota) {
+        List<Ingreso> ingresos = servicioIngreso.obtenerIngresosPorMascota(idMascota);
+        if (ingresos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        } else {
+            return ResponseEntity.ok(ingresos);
         }
     }
 }
