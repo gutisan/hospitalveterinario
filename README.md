@@ -29,16 +29,16 @@ La API expone los siguientes endpoints para la gestión de mascotas e ingresos:
   1. POST /mascota
 
     - Guarda una nueva mascota.
-    - Se debe añadir un JSON
+    - Se debe añadir un JSON con este formato:
       ```
-      {    
-    "especie": "Gato",
-    "raza": "Persa",
-    "edad": 3,
-    "codigoIdentificacion": "12345",
-    "dniResponsable": "11133333A",    
-   }
- ```
+      {
+        "especie": "Gato",
+        "raza": "Persa",
+        "edad": 3,
+        "codigoIdentificacion": "12345",
+        "dniResponsable": "11133333A",
+      }
+    ´´´
 
 
       
