@@ -62,4 +62,24 @@ La API expone los siguientes endpoints para la gestión de mascotas e ingresos:
 
   1. GET /ingreso
     - Devuelve una lista de todos los ingresos registrados
-      
+
+
+  2. POST /ingreso + JSON (idMAscota, Fecha, Dni )
+
+    - Crea un ingreso con el id de la mascota, la fecha de entrada al hospital y
+       el Dni de la persona que registra el ingreso.
+
+    - Devuelve un JSON con los datos del Ingreso con estado "ALTA"
+
+
+  3. PUT /ingreso/{idMAscota}/{idIngreso}/ +JSON
+
+    - Modifica un ingreso con los siguientes supuestos:
+
+      . Se puede cambiar el estado del mismo, la fecha de inicio, 
+      . Si se establece la fecha de salida el estado cambia a "FINALIZADO"
+
+
+  4. DELETE /ingreso/{idIngreso}
+
+    - Cambia el estado a "ANULADO" 
