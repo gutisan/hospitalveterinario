@@ -68,14 +68,16 @@ La API expone los siguientes endpoints para la gestión de mascotas e ingresos:
 
     - Crea un ingreso con el id de la mascota, la fecha de entrada al hospital y
        el Dni de la persona que registra el ingreso.
-       ``` {
-  "fechaIngreso": "2024-07-15T14:00:00",
-  "fechaSalida": null,
-  "mascota": {
-    "id": 4
-  },
-  "dniRegistrador": "11455633G"
-} ```
+       ``` 
+       {
+          "fechaIngreso": "2024-07-15T14:00:00",
+          "fechaSalida": null,
+          "mascota":
+               {
+                "id": 4
+               },
+          "dniRegistrador": "11455633G"
+        } ```
 
     - Devuelve un JSON con los datos del Ingreso con estado "ALTA"
 
