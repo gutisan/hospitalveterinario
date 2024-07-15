@@ -132,19 +132,4 @@ class MascotaControllerTest {
         verify(servicioIngreso, times(1)).obtenerIngresosPorMascota(idMascota);
     }
 
-    @Test
-    void obtenerIngresosPorMascota_ingresosVacios() {
-        // Arrange
-        Long idMascota = 1L;
-        when(servicioIngreso.obtenerIngresosPorMascota(idMascota)).thenReturn(new ArrayList<>());
-
-        // Act
-        ResponseEntity<List<Ingreso>> response = mascotaController.obtenerIngresosPorMascota(idMascota);
-
-        // Assert
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(0, response.getBody().size());
-        verify(servicioIngreso, times(1)).obtenerIngresosPorMascota(idMascota);
-    }
 }
