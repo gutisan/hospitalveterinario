@@ -63,7 +63,7 @@ public class ServicioIngreso {
         Ingreso ingreso = ingresoRep.findById(idIngreso)
                 .orElseThrow(() -> new RuntimeException("Ingreso no encontrado"));
         // verifica que el ingreso corresponda a la mascota especificada
-        Mascota mascota = ingreso.getMascota();
+        Mascota mascota = ingreso.buscarMascota();
 
         if (mascota == null || !mascota.getId().equals(idMascota)) {
             throw new RuntimeException("El ingreso no corresponde a la mascota especificada");
