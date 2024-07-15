@@ -77,7 +77,7 @@ La API expone los siguientes endpoints para la gestión de mascotas e ingresos:
                 "id": 4
                },
           "dniRegistrador": "11455633G"
-        } ```
+        } 
 
     - Devuelve un JSON con los datos del Ingreso con estado "ALTA"
 
@@ -88,10 +88,12 @@ La API expone los siguientes endpoints para la gestión de mascotas e ingresos:
 
       . Se puede cambiar el estado del mismo, la fecha de inicio, 
       . Si se establece la fecha de salida el estado cambia a "FINALIZADO"
-      ```{
+      ```
+      {
           "estado": "FINALIZADO",
           "fechaSalida": "2024-07-15T14:00:00"
-      }```
+      }
+      ```
 
 
   4. DELETE /ingreso/{idIngreso}
